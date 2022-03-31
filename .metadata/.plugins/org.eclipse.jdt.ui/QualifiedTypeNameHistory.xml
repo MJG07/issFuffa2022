@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="it.unibo.Radar22.domain.interfaces.ISonar"/>
+    <fullyQualifiedTypeName name="it.unibo.Radar22.domain.interfaces.ILed"/>
+    <fullyQualifiedTypeName name="it.unibo.Radar22.domain.mock.LedMock"/>
+    <fullyQualifiedTypeName name="org.junit.Test"/>
+</qualifiedTypeNameHistroy>
