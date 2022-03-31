@@ -54,7 +54,7 @@ public class RadarSysSprint3DevicesOnRaspMain implements IApplication{
 	
 			RadarSystemConfig.tracing           = false;		
 			RadarSystemConfig.RadarGuiRemote    = true;		
-			RadarSystemConfig.protcolType       = ProtocolType.tcp;		
+			RadarSystemConfig.protcolType       = ProtocolType.udp;		
 			RadarSystemConfig.ledPort           = 8010;
 			RadarSystemConfig.sonarPort			= 8015;
 		}
@@ -62,6 +62,7 @@ public class RadarSysSprint3DevicesOnRaspMain implements IApplication{
 	}
 	protected void configure() {		
 	   ProtocolType protocol = RadarSystemConfig.protcolType;
+	   System.out.println(protocol);
 	   led                   = DeviceFactory.createLed();
  	   IApplMsgHandler ledh  = LedApplHandler.create("ledh", led);
 	   sonar      = DeviceFactory.createSonar();

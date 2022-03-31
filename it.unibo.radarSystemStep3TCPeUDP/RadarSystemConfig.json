@@ -3,11 +3,11 @@
 "RadarGuiRemote"   : "true",
 "tracing"          : "false",
 "testing"          : "false",
+"protocolType"     :"udp",
 
 "hostAddr"         : "192.168.205.77",
 "raspAddr"         : "192.168.205.189",
 "serverPort"       : "8080",
 "ledPort"          : "8010",
-"sonarPort"        : "8015",
-"protocolType"     : "udp"
+"sonarPort"        : "8015"
 }
