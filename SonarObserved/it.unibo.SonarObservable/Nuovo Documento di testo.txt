@@ -1,0 +1,15 @@
+{
+"webCam"           : "true",
+"sonarObservable"  : "false",
+
+
+"simulation"       : "false",
+"sonarDistanceMax" : "300",
+"sonarDelay"       : "200",
+"DLIMIT"           : "70",
+"ledGui"           : "true",
+"tracing"          : "false",
+"testing"          : "false"
+
+
+}
