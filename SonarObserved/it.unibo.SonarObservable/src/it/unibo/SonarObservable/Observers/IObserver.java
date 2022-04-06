@@ -2,7 +2,7 @@ package it.unibo.SonarObservable.Observers;
 
 import it.unibo.radarSystem22.domain.interfaces.IDistance;
 
-public interface IObserver {
+public interface IObserver{
 	
 	public String getIP();
 	
@@ -10,20 +10,14 @@ public interface IObserver {
 
 	public String getName();
 	
-	public IDistance getDistance();
+	public int getDistance();
 	
 	public int getCont();
-
-	public int getLimit();
-	
-	public void setLimit(int limit);
-	
+		
 	public void registrami(SonarObservable sonarOb);
 	
-	public void Update(IDistance d);
-	
-	public void Inizialize (IDistance d);
-	
 	public int getType();
+	
+	public void Update(IDistance d);
 
 }

@@ -18,15 +18,14 @@ private ObserverRemoto obR;
 		this.sob=ob;
 	}
 	
-	//{"name": "nome" , "limit": limit , "ipadress": "ip", "port" : "port" }
+	//{"name": "nome", "ipadress": "ip", "port" : "port" }
 	public void elaborate(String message, Interaction2021 conn) {
 		ColorsOut.out(name + " | elaborate " + message + " conn=" + conn);
 		JSONObject jsonObj   = new JSONObject(message.trim());
 		String name = ""+jsonObj.getString("name");
-		int limit    = jsonObj.getInt("limit");
 		String ip = ""+jsonObj.getString("ipadress");
 		int port  = jsonObj.getInt("port");
-		obR=new ObserverRemoto(name,ip,limit,port);
+		obR=new ObserverRemoto(name,ip,port);
 		sob.addObserver(obR);
 	}
 

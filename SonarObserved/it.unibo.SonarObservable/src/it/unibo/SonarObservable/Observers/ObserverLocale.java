@@ -1,12 +1,14 @@
 package it.unibo.SonarObservable.Observers;
 
+import it.unibo.SonarObservable.Interfaces.IMisura;
+import it.unibo.SonarObservable.Utils.Misura;
 import it.unibo.radarSystem22.domain.interfaces.IDistance;
 
 public class ObserverLocale implements IObserver{
 	
 	public String name;
 	public int limit;
-	public IDistance misura;
+	public IMisura misura= new Misura();
 	public int cont = 0;
 	public int type=0;
 	
@@ -19,38 +21,23 @@ public class ObserverLocale implements IObserver{
 		return name;
 	}
 	
-	public IDistance getDistance() {
-		return misura;
+	public int getDistance() {
+		return misura.getVal();
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getLimit() {
-		return limit;
-	}
-
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
-	
 	
 	public void registrami(SonarObservable sonarOb) {
 		sonarOb.addObserver(this);
 	}
 	
 	public void Update(IDistance d) {
-		misura=d;
+		misura.setValue(d);
+		cont++;
 	}
 	
-	public void Inizialize (IDistance d) {
-		if(cont==0) {
-			misura = d;
-			cont++;
-		}
-	}
-
 	@Override
 	public int getType() {
 		return type;

@@ -41,11 +41,9 @@ public class ObservableGuyOnPc implements IApplication{
 			PrintWriter output = new PrintWriter(skt.getOutputStream());                                                   
 			String name="radarguy";
 			InetAddress localhost = InetAddress.getLocalHost();
-			int limit =5;
 			int port=ObservableSystemConfig.sonarObPort;
-			String mess = "{ \"name\" : N , \"limit\" : Z ,\"ipadress\" : K,\"port\" : P }" ;
+			String mess = "{ \"name\" : N,\"ipadress\" : K,\"port\" : P }" ;
 			mess=mess.replace("N" , name );
-			mess=mess.replace("Z" , String.valueOf(limit) );
 			mess=mess.replace("K" , localhost.getHostAddress()).trim();
 			mess=mess.replace("P",  String.valueOf(port));
 			

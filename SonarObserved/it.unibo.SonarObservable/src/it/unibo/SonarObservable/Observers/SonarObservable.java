@@ -16,6 +16,7 @@ public class SonarObservable {
 	private List<IObserver> osservatori;
 	private ISonar sonar;
 	private IDistance d;
+	private int limit=5;
 	private int o;
 	
 	
@@ -51,53 +52,19 @@ public class SonarObservable {
 		     if(sonarActive) {
 		      while( sonar.isActive() ) {
 		       d = sonar.getDistance(); //potrebbe essere bloccante
-
+		       System.out.println(d);
 		        for(IObserver ob: osservatori) {
-		        	if(ob.getType()==0) {
-		        		if(ob.getCont()==0) {
-		        			System.out.println("fisrt time for" + ob.getName());
-			        		ob.Inizialize(d);
-		        		}
-			    	}else {
-			    		if(ob.getCont()==0) {
-			    			System.out.println("fisrt time for" + ob.getName());
-			    			ob.Inizialize(d);
-				    		Socket skt = new Socket(ob.getIP(), ob.getPort());
-				    		
-							PrintWriter output = new PrintWriter(skt.getOutputStream());
-							String msg= "{ \"distance\" : D , \"angle\" : 90 }";
-							msg=msg.replace("D" , String.valueOf(d) );
-							output.print(msg);
-							output.flush();
-							output.close();
-			    		}
+		        	if(ob.getCont()==0) {
+		        		update(d,ob);
 			    	}
 		        	System.out.println("DISTANZA OB " + ob.getDistance());
-		        	if(d.getVal() > ob.getDistance().getVal())
-				         o = d.getVal() - ob.getDistance().getVal();
+		        	if(d.getVal() > ob.getDistance())
+				         o = d.getVal() - ob.getDistance();
 				    else 
-				         o = ob.getDistance().getVal() - d.getVal();
-				    if(o>=ob.getLimit()) {
-				    	if(ob.getType()==0) {
-				    		ob.Update(d);
-				        	ColorsOut.outappl("cambiamento sensibile per " + ob.getName(), ColorsOut.GREEN);
-				    	}else {
-				    		ColorsOut.outappl("cambiamento sensibile per " + ob.getName()+ "invio dei dati", ColorsOut.GREEN);
-				    		ob.Update(d);
-				    		Socket skt = new Socket(ob.getIP(), ob.getPort());
-				    		if(skt.isConnected()) {
-				    			System.out.println("ok");
-				    		}else {
-				    			System.out.println("no");
-				    		}
-							PrintWriter output = new PrintWriter(skt.getOutputStream());
-							String msg= "{ \"distance\" : D , \"angle\" : 90 }";
-							msg=msg.replace("D" , String.valueOf(d) );
-							output.print(msg);
-							output.flush();
-							output.close();
-				    	}
-			        	
+				         o = ob.getDistance() - d.getVal();
+				    if(o>=limit) {
+				    	System.out.println("cambiamento di distanza per:"+ob.getName());
+				    	update(d,ob);
 				   }
 		        }    
 		       ColorsOut.outappl("Distanza attuale: " +d, ColorsOut.GREEN  );
@@ -105,11 +72,32 @@ public class SonarObservable {
 		       }
 		     }
 		    } catch (Exception e) {
-		      ColorsOut.outerr("ERROR"+e.getMessage());
+		      ColorsOut.outerr("ERRORA"+e.getMessage());
 		    }     
 		   }
 		  }.start();
 		  
 		 }
+	
+	public void update(IDistance d,IObserver ob){
+		try {
+			if(ob.getType()==0) {
+	    		ob.Update(d);
+	    	}else {
+	    		ob.Update(d);
+	    		Socket skt = new Socket(ob.getIP(), ob.getPort());
+				PrintWriter output = new PrintWriter(skt.getOutputStream());
+				String msg= "{ \"distance\" : D , \"angle\" : 90 }";
+				msg=msg.replace("D" , String.valueOf(d) );
+				output.print(msg);
+				output.flush();
+				output.close();
+	    	}
+		}catch(Exception e) {
+		   ColorsOut.outerr("ERRORB"+e.getMessage());
+		   System.out.println(e);
+		}   
+	}
+		
 	
 }
